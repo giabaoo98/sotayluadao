@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b1b33" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
+<title>Sổ Tay Lừa Đảo — Tra cứu SĐT, STK, website trước khi chuyển tiền</title>
+<meta name="description" content="Tra cứu số điện thoại, số tài khoản ngân hàng, website và tài khoản mạng xã hội đã từng bị báo cáo lừa đảo. Cộng đồng báo cáo, kiểm duyệt trước khi công khai." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230B1B33'/%3E%3Cpath d='M50 22l22 9v18c0 14-9 24-22 29-13-5-22-15-22-29V31z' fill='%2316C79A'/%3E%3Cpath d='M42 50l6 6 12-13' stroke='%230B1B33' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M50 16l26 11v21c0 16-11 28-26 34-15-6-26-18-26-34V27z" fill="currentColor"/><path d="M40 50l7 7 14-15" stroke="#0B1B33" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-text"><strong>Sổ Tay Lừa Đảo</strong><small>Tra cứu trước khi chuyển tiền</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#tra-cuu">Tra cứu</a>
+      <a href="#canh-bao">Cảnh báo</a>
+      <a href="#cam-nang">Cẩm nang</a>
+      <a href="/admin" class="nav-admin">Quản trị</a>
+      <button class="btn btn-primary btn-sm nav-cta" data-open-report>Gửi báo cáo</button>
+    </nav>
+    <button class="btn btn-primary btn-sm header-cta" data-open-report>Gửi báo cáo</button>
+    <button class="menu-btn" id="menu-btn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="tra-cuu">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <span class="pill">Cộng đồng kiểm duyệt · Cập nhật liên tục</span>
+      <h1>Kiểm tra thông tin người bán<br /><span class="hl">trước khi chuyển tiền</span></h1>
+      <p class="hero-sub">
+        Tra cứu số điện thoại, số tài khoản ngân hàng, website hoặc tài khoản mạng xã hội
+        đã từng bị cộng đồng báo cáo. Một phút kiểm tra, tránh mất cả tháng lương.
+      </p>
+
+      <div class="search-card">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" data-type="all" role="tab">Tất cả</button>
+          <button class="tab" data-type="phone" role="tab">SĐT / Zalo</button>
+          <button class="tab" data-type="bank" role="tab">STK ngân hàng</button>
+          <button class="tab" data-type="web" role="tab">Website</button>
+          <button class="tab" data-type="social" role="tab">Facebook / TikTok</button>
+        </div>
+        <form class="search-form" id="search-form" autocomplete="off">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          </span>
+          <input id="q" name="q" type="search" placeholder="Nhập số điện thoại, số tài khoản, link website…" aria-label="Từ khoá tra cứu" />
+          <button class="btn btn-primary" type="submit">Tra cứu</button>
+        </form>
+        <div class="search-hint">
+          <span>Thử nhanh:</span>
+          <button class="chip" data-sample="0900 000 117">0900 000 117</button>
+          <button class="chip" data-sample="7777 0000 1111">7777 0000 1111</button>
+          <button class="chip" data-sample="demo-shop-gia-re">demo-shop-gia-re</button>
+        </div>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stat"><b data-count="0" id="st-reports">—</b><span>báo cáo đã duyệt</span></div>
+        <div class="stat"><b data-count="0" id="st-targets">—</b><span>đối tượng bị báo cáo</span></div>
+        <div class="stat"><b data-count="0" id="st-amount">—</b><span>tổng thiệt hại ghi nhận</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-label="Cảnh báo nhanh">
+    <div class="ticker-track" id="ticker-track"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <section class="section results-section" id="ket-qua" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="results-title">Kết quả tra cứu</h2>
+          <p class="muted" id="results-sub"></p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="clear-results">Xoá kết quả</button>
+      </div>
+      <div id="results"></div>
+    </div>
+  </section>
+
+  <!-- TOP WARNINGS -->
+  <section class="section" id="canh-bao">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Đối tượng bị báo cáo nhiều nhất</h2>
+          <p class="muted">Xếp theo số lượng báo cáo đã được kiểm duyệt.</p>
+        </div>
+      </div>
+      <div class="grid-cards" id="top-list"></div>
+    </div>
+  </section>
+
+  <!-- RECENT -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Báo cáo mới nhất</h2>
+          <p class="muted">Nội dung do cộng đồng gửi, đã qua kiểm duyệt.</p>
+        </div>
+        <button class="btn btn-outline btn-sm" data-open-report>Gửi báo cáo của bạn</button>
+      </div>
+      <div class="table-wrap">
+        <table class="table" id="recent-table">
+          <thead>
+            <tr><th>Đối tượng</th><th>Loại</th><th>Nội dung</th><th class="num">Thiệt hại</th><th>Thời gian</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="section" id="cam-nang">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Cẩm nang phòng tránh</h2>
+          <p class="muted">Bốn dấu hiệu xuất hiện trong gần như mọi vụ lừa đảo chuyển tiền.</p>
+        </div>
+      </div>
+      <div class="grid-guide">
+        <article class="guide">
+          <span class="guide-no">01</span>
+          <h3>Không chuyển tiền cho tài khoản cá nhân</h3>
+          <p>Đơn vị bán hàng chuyên nghiệp dùng tài khoản công ty. Tên chủ tài khoản khác tên thương hiệu là dấu hiệu đỏ đầu tiên.</p>
+        </article>
+        <article class="guide">
+          <span class="guide-no">02</span>
+          <h3>“Sai nội dung, xác minh lại” = lừa đảo</h3>
+          <p>Ngân hàng không bao giờ yêu cầu chuyển lại lần hai vì sai nội dung. Không có nghiệp vụ nào gọi là “phí xác minh giải ngân”.</p>
+        </article>
+        <article class="guide">
+          <span class="guide-no">03</span>
+          <h3>Không chia sẻ màn hình, không đọc OTP</h3>
+          <p>Video call rồi nhờ chia sẻ màn hình là cách phổ biến để đọc trộm mã OTP. Không ai có quyền yêu cầu bạn làm việc này.</p>
+        </article>
+        <article class="guide">
+          <span class="guide-no">04</span>
+          <h3>Kiểm tra kỹ tên miền</h3>
+          <p>Tên miền giả thường thêm bớt ký tự hoặc đổi đuôi. Hãy tự gõ địa chỉ thay vì bấm link được gửi tới.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Bạn vừa gặp một vụ lừa đảo?</h2>
+        <p>Gửi thông tin để người tiếp theo tra cứu được trước khi chuyển tiền. Báo cáo được kiểm duyệt trước khi công khai.</p>
+      </div>
+      <button class="btn btn-light" data-open-report>Gửi báo cáo ngay</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <strong>Sổ Tay Lừa Đảo</strong>
+      <p>Sổ tay tra cứu và cảnh báo lừa đảo trực tuyến, vận hành bởi cộng đồng và đội ngũ kiểm duyệt độc lập.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#tra-cuu">Tra cứu</a>
+      <a href="#canh-bao">Cảnh báo</a>
+      <a href="#cam-nang">Cẩm nang</a>
+      <a href="#" data-open-report>Gửi báo cáo</a>
+      <a href="/admin">Quản trị</a>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p><strong>Lưu ý pháp lý:</strong> Dữ liệu trên trang mang tính tham khảo, tổng hợp từ báo cáo của người dùng. Đây không phải kết luận của cơ quan có thẩm quyền. Nếu bạn cho rằng một thông tin là sai, hãy gửi yêu cầu đính chính — nội dung sẽ được xem xét và gỡ bỏ khi có căn cứ.</p>
+    <p>© <span id="year"></span> Sổ Tay Lừa Đảo. Bản demo — dữ liệu minh hoạ, không phải cá nhân/tổ chức có thật.</p>
+  </div>
+</footer>
+
+<!-- REPORT MODAL -->
+<div class="modal" id="report-modal" hidden>
+  <div class="modal-backdrop" data-close-report></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="report-title">
+    <button class="modal-close" data-close-report aria-label="Đóng">×</button>
+    <h2 id="report-title">Gửi báo cáo</h2>
+    <p class="muted">Thông tin sẽ được kiểm duyệt trước khi hiển thị công khai. Không đăng dữ liệu cá nhân không liên quan.</p>
+    <form id="report-form" class="form">
+      <div class="form-row">
+        <label>Loại đối tượng
+          <select name="type" required>
+            <option value="phone">SĐT / Zalo</option>
+            <option value="bank">STK ngân hàng</option>
+            <option value="web">Website</option>
+            <option value="social">Facebook / TikTok</option>
+            <option value="other">Khác</option>
+          </select>
+        </label>
+        <label>Thông tin đối tượng
+          <input name="target" required minlength="4" placeholder="VD: 0900 000 117" />
+        </label>
+      </div>
+      <label>Tiêu đề ngắn
+        <input name="title" required minlength="6" maxlength="120" placeholder="VD: Giả danh nhân viên giao hàng" />
+      </label>
+      <label>Diễn biến
+        <textarea name="reason" required minlength="20" maxlength="2000" rows="4" placeholder="Kể lại ngắn gọn: liên hệ qua đâu, yêu cầu gì, bạn đã chuyển tiền chưa…"></textarea>
+      </label>
+      <div class="form-row">
+        <label>Thiệt hại (VNĐ)
+          <input name="amount" type="number" min="0" step="1000" value="0" />
+        </label>
+        <label>Kênh liên lạc
+          <input name="channel" placeholder="Zalo, Facebook, điện thoại…" />
+        </label>
+      </div>
+      <label>Bằng chứng (link ảnh, nếu có)
+        <input name="evidence" placeholder="https://…" />
+      </label>
+      <label>Tên hiển thị
+        <input name="alias" placeholder="Ẩn danh" />
+      </label>
+      <div class="form-foot">
+        <p class="form-note">Bằng việc gửi, bạn xác nhận thông tin là đúng sự thật và chịu trách nhiệm về nội dung.</p>
+        <button class="btn btn-primary" type="submit">Gửi báo cáo</button>
+      </div>
+      <p class="form-status" id="report-status" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

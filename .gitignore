@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+sotayluadao.db
+server.log
+.DS_Store

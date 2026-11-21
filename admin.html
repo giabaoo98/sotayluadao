@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kiểm duyệt — Sổ Tay Lừa Đảo</title>
+<link rel="stylesheet" href="/style.css" />
+<style>
+  body { background: #f6f8fb; }
+  .admin-top { background: var(--navy); color: #fff; padding: 18px 0; }
+  .admin-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .admin-top h1 { font-size: 18px; }
+  .admin-top a { font-size: 13.5px; color: #9fb0c6; }
+  .admin-main { padding: 28px 0 60px; }
+  .keybar { display: flex; gap: 10px; align-items: center; margin-bottom: 22px; flex-wrap: wrap; }
+  .keybar input { padding: 10px 13px; border: 1px solid #d6dde8; border-radius: 10px; font-family: inherit; font-size: 14px; min-width: 220px; }
+  .item { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .item h3 { font-size: 15.5px; margin-bottom: 4px; }
+  .item .meta { font-size: 12.5px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .item p { font-size: 14px; color: var(--body); }
+  .item .acts { display: flex; gap: 10px; margin-top: 14px; }
+  .ok { color: var(--mint-dark); }
+  .err { color: var(--danger); }
+  .hint { font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="admin-top">
+  <div class="wrap">
+    <h1>Kiểm duyệt báo cáo</h1>
+    <a href="/">← Về trang tra cứu</a>
+  </div>
+</div>
+
+<div class="wrap admin-main">
+  <div class="keybar">
+    <input id="key" type="password" placeholder="Khoá quản trị (demo: demo-admin)" />
+    <button class="btn btn-primary btn-sm" id="load">Tải danh sách chờ duyệt</button>
+    <span class="hint">Báo cáo chỉ hiển thị công khai sau khi được duyệt.</span>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const keyEl = $("#key");
+keyEl.value = localStorage.getItem("stll_key") || "demo-admin";
+
+async function load() {
+  const key = keyEl.value.trim();
+  localStorage.setItem("stll_key", key);
+  const box = $("#list");
+  box.innerHTML = '<p class="hint">Đang tải…</p>';
+  try {
+    const res = await fetch(`/api/admin/pending?key=${encodeURIComponent(key)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || "Lỗi");
+    if (!data.items.length) {
+      box.innerHTML = '<p class="hint">Không có báo cáo nào đang chờ duyệt.</p>';
+      return;
+    }
+    box.innerHTML = data.items.map((r) => `
+      <article class="item">
+        <h3>${esc(r.title)}</h3>
+        <div class="meta">
+          <span>#${r.id}</span>
+          <span><b>${esc(r.target)}</b></span>
+          <span>${esc(r.type_label)}</span>
+          <span>${esc(r.created_at)}</span>
+          <span>Người gửi: ${esc(r.alias || "Ẩn danh")}</span>
+        </div>
+        <p>${esc(r.reason)}</p>
+        <div class="acts">
+          <button class="btn btn-primary btn-sm" data-id="${r.id}" data-action="approve">Duyệt</button>
+          <button class="btn btn-outline btn-sm" data-id="${r.id}" data-action="reject">Từ chối</button>
+        </div>
+      </article>`).join("");
+  } catch (e) {
+    box.innerHTML = `<p class="err">${esc(e.message)}</p>`;
+  }
+}
+
+$("#list").addEventListener("click", async (e) => {
+  const btn = e.target.closest("[data-id]");
+  if (!btn) return;
+  const key = keyEl.value.trim();
+  btn.disabled = true;
+  try {
+    const res = await fetch(`/api/admin/approve/${btn.dataset.id}?key=${encodeURIComponent(key)}&action=${btn.dataset.action}`, { method: "POST" });
+    if (!res.ok) throw new Error((await res.json()).detail || "Lỗi");
+    btn.closest(".item").remove();
+  } catch (err) {
+    alert(err.message);
+    btn.disabled = false;
+  }
+});
+
+$("#load").addEventListener("click", load);
+load();
+</script>
+</body>
+</html>
